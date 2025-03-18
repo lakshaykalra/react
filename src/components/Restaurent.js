@@ -5,7 +5,9 @@ export default RestaurentCardComponent = (props) => {
       <div className="logo">
         <img
           className="logo1"
-          src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks2024/120805201B.png"}
+          src={
+            "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks2024/120805201B.png"
+          }
         ></img>
       </div>
       <div className="res-info">
@@ -15,4 +17,19 @@ export default RestaurentCardComponent = (props) => {
       </div>
     </div>
   );
+};
+
+export const restaurantWithPromotedLabel = (RestaurentCardComponent) => {
+  return (props) => {
+    const { promoted } = props.data;
+
+    return promoted === true ? (
+      <div>
+        <h1>promoted</h1>
+        <RestaurentCardComponent {...props} />
+      </div>
+    ) : (
+      <RestaurentCardComponent {...props} />
+    );
+  };
 };

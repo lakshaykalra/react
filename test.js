@@ -1,49 +1,42 @@
-function findArr(arrA, arrB, rng, wanted) {
-  // your code here
-  // merge, unique, sort
-  // check in aarA and arrB for occurences greater than 1
-  // check range
-  // check odd/even
-  let mapOfArrayA = {};
-  let mapOfArrayB = {};
-  let map = {};
+const string1 = "ezupkr"
 
-  let mergedArray = arrA.concat(arrB);
+// {}
+// 
 
-  let uniqueArray = mergedArray.filter((element) => {
-    if (map[element] === undefined) {
-      map[element] = 1;
-      return element !== undefined;
+
+const string2 = "ubmrapg"
+
+// u, p, r
+
+// string 1 => aau
+// aau
+// 
+
+// a, a, y, u, 
+
+function result(string1, string2){
+  let map = {}
+  let count=0
+
+
+  for(let i=0;i<string2.length;i++){
+    map[string2[i]] = map[string2[i]] === undefined ? 1 : map[string2[i]] + 1
+  }
+
+  console.log(map)
+
+
+
+  for(let i=0; i<string1.length;i++){
+    if(map[string1[i]]!==undefined && map[string1[i]] >0) {
+      count += 1
+      map[string1[i]] = map[string1[i]] - 1
     }
-  });
-
-  for (let element of arrA) {
-    mapOfArrayA[element] =
-      mapOfArrayA[element] === undefined ? 1 : mapOfArrayA[element] + 1;
   }
+  console.log(map)
 
-  for (let element of arrB) {
-    mapOfArrayB[element] =
-      mapOfArrayB[element] === undefined ? 1 : mapOfArrayB[element] + 1;
-  }
 
-  const sortedArray = uniqueArray
-    .sort((a, b) => a - b)
-    .filter((element) => mapOfArrayA[element] > 1 && mapOfArrayB[element] > 1)
-    .filter((element) => element >= rng[0] && element <= rng[1])
-    .filter((element) => {
-      if (wanted === "even") return element % 2 === 0;
-      else return element % 2 !== 0;
-    });
-
-  return sortedArray;
+  return count
 }
 
-console.log(
-  findArr(
-    [1, -2, 7, 2, 1, 3, 4, 7, 1, 0, 2, 3, 0, 4],
-    [0, 4, 2, -1, 1, 1, 1, 1, 2, 3, 3, 7, 7, 0, 4],
-    [-4, 4],
-    "even"
-  )
-);
+console.log(result(string1, string2))

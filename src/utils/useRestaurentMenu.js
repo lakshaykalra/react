@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default useRestaurentMenu = (resId) => {
-  const [resInfo, setResInfo] = useState([]);
+  const [resInfo, setResInfo] = useState(null);
 
   useEffect(async () => {
     const data = await fetch(
@@ -13,7 +13,17 @@ export default useRestaurentMenu = (resId) => {
       }
     );
 
-    setResInfo({ restaurentName: "Pizza Hut", menu: "Burger" });
+    let menu = await data.json()
+
+    console.log('<<<<<<<restaurent menu data>>>>>', menu)
+
+
+    menu = menu.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter((element => element.card.card["@type"] ==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    ))
+
+
+
+    setResInfo({restaurentName:"Pizza Hut", menu});
   }, []);
 
   return resInfo;

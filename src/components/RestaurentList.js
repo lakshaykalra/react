@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import Restaurent from "./Restaurent";
+import Restaurent , {restaurantWithPromotedLabel} from "./Restaurent";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from '../utils/useOnlineStatus'
@@ -9,6 +9,9 @@ export default RestaurentListComponent = () => {
   const [listRest, setListRest] = useState([]);
   const [listRestCopy, setListRestCopy] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const Component = restaurantWithPromotedLabel(Restaurent)
+
+
 
   useEffect(async () => {
     console.log("<<<<<<<<<<use effect called");
@@ -26,6 +29,10 @@ export default RestaurentListComponent = () => {
     const restaurants =
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
+
+        console.log('restuarent', restaurants)
+
+        restaurants[0].info['promoted'] = true
 
     setListRest(restaurants);
     setListRestCopy(restaurants);
@@ -75,7 +82,7 @@ export default RestaurentListComponent = () => {
           // <Link key={element.info.id} to={"/restaurents/" + element.info.id}>
           //   <Restaurent data={element.info} />
           // </Link>
-          <Restaurent data={element.info} key={element.info.id} />
+          <Component data={element.info} key={element.info.id} />
         ))}
       </div>
     </div>
